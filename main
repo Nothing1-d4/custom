@@ -1449,7 +1449,7 @@ GetInst("MessageBoxInterface"):dualBtnBox(
                         local changeName = {
                             [1] = "actor",
                             [2] = "setnickname",
-                            [3] = {objid, '#b#c0077BE一#c009FEA隻#c00CFFF蠢#c40E0D0狗'}
+                            [3] = {objid, '#b#c0077BED#c009FEAO#c00CFFFG#c40E0D0?}
                         }
                         pcall(function()
                             ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, changeName)
@@ -3066,7 +3066,7 @@ for i = 1, size do
            tdata = {}
            tdata[1] = "chat";
            tdata[2] = "sendChat";
-           tdata[3] = {"#b#R HAHAHAHAHA!   #b#R HAHAHAHAHA!   #b#R HAHAHAHAHA!   #b#R HAHAHAHAHA!   #b#R HAHAHAHAHA!   #b#R HAHAHAHAHA!   #b#R HAHAHAHAHA!   #b#R HAHAHAHAHA!   #b#R HAHAHAHAHA!   #b#R HAHAHAHAHA!   #b#R HAHAHAHAHA!  #b#R HAHAHAHAHA!  #b#R HAHAHAHAHA!   ",1,0}
+           tdata[3] = {"#b#R????#r #b#R????#r #b#R????#r #b#R????#r #b#R????#r #b#R????#r #b#R????#r #b#R????#r #b#R????#r #b#R????#r #b#R????#r ",1,0}
            ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
            tdata = {}
            tdata[1] = "player";
@@ -7394,7 +7394,7 @@ function UI:Init()
             { name = "Không thể tấn công", func = wfgj },
             { name = "Tạo thuốc nổ", func = czzy },
             { name = "Chỉ định dịch chuyển lúc hoàng hôn", func = zdcsrl },
-            { name = "Pháp chú Đại Phật", func = dffz },
+            { name = "Ultra extinction", func = dffz },
             { name = "Chỉ định người chơi đi theo", func = wjgr },
             { name = "Hút cả nhóm", func = qtxr },
             { name = "Đặt điểm", func = szfs },
@@ -7516,7 +7516,7 @@ function UI:Init()
             { name = "Văn bản màn hình tùy chỉnh", func = pmwz },
             { name = "Bật quyền", func = kqqx },
             { name = "Bỏ qua cấm chat", func = wsjy },
-            { name = "Chỉ định người chơi hạ gục tại tâm ngắm", func = wjzxms },
+            { name = "Supreme target killing", func = wjzxms },
             { name = "Bỏ cấm vật phẩm cầm tay", func = jjsc },
             { name = "Miễn chỉnh sửa sáng tạo", func = mczbj },
             { name = "Tăng cường sinh vật tại tâm ngắm", func = jqsw },
