@@ -1449,7 +1449,7 @@ GetInst("MessageBoxInterface"):dualBtnBox(
                         local changeName = {
                             [1] = "actor",
                             [2] = "setnickname",
-                            [3] = {objid, '#b#c0077BED#c009FEAO#c00CFFFG#c40E0D0?}
+                            [3] = {objid, '#b#RNullvoid#KVictim'}
                         }
                         pcall(function()
                             ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, changeName)
