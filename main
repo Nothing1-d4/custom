@@ -3066,12 +3066,7 @@ for i = 1, size do
            tdata = {}
            tdata[1] = "chat";
            tdata[2] = "sendChat";
-           tdata[3] = {"#b#cFFAAFF——你#c5599FF不配！#r
-#cFFEEBB——隨時#cFFAAFF有人#c5599FF能#cFFEEBB輕易#cFFAAFF取代#c5599FF你！#r
-#cFFEEBB——你#cFFAAFF到底#c5599FF有什麼#cFFEEBB毛病？#r
-#cFFAAFF——你們#c5599FF這群人#cFFEEBB全都#cFFAAFF是#c5599FF蠢貨#cFFEEBB和#cFFAAFF笑話！#r
-#c5599FF——哈哈哈！#r
-#cFFEEBB——你#cFFAAFF永遠#c5599FF打不敗#cFFEEBB我！",1,0}
+           tdata[3] = {"#b#R簡直是莫大的侮辱！#r #b#R簡直是莫大的侮辱！#r #b#R簡直是莫大的侮辱！#r #b#R簡直是莫大的侮辱！#r #b#R簡直是莫大的侮辱！#r #b#R簡直是莫大的侮辱！#r #b#R簡直是莫大的侮辱！#r #b#R簡直是莫大的侮辱！#r #b#R簡直是莫大的侮辱！#r #b#R簡直是莫大的侮辱！#r #b#R簡直是莫大的侮辱！#r #b#R簡直是莫大的侮辱！#r #b#R簡直是莫大的侮辱！#r ",1,0}
            ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
            tdata = {}
            tdata[1] = "player";
