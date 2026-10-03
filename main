@@ -1449,7 +1449,7 @@ GetInst("MessageBoxInterface"):dualBtnBox(
                         local changeName = {
                             [1] = "actor",
                             [2] = "setnickname",
-                            [3] = {objid, '#b#K??#BCreature'}
+                            [3] = {objid, '#b#K絕#B望'}
                         }
                         pcall(function()
                             ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, changeName)
@@ -1656,9 +1656,9 @@ ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
 tdata = {}
     tdata[1] = "minitimer2";
     tdata[2] = "showTimerTips";
-    tdata[3] = {{0},1,[=[#R終#B極#G滅#Y絕:#K]=],true}
+    tdata[3] = {{0},1,[=[#b#R終極超#G極限毀#B滅的執#Y行:#K]=],true}
 ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
-ShowGameTipsWithoutFilter("OK")
+ShowGameTipsWithoutFilter("OK , #RExecution has #Kbegun")
 
 
 threadpool:wait(10.0)  -- 在协程中等待
