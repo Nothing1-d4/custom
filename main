@@ -1312,12 +1312,12 @@ ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
     tdata = {}
     tdata[1] = "actor";
     tdata[2] = "changeCustomModel";
-    tdata[3] = {objid,[=[skin_38]=]}
+    tdata[3] = {objid,[=[skin_20]=]}
 ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
 tdata = {}
     tdata[1] = "actor";
     tdata[2] = "setnickname";
-    tdata[3] = {objid,"#b#RThiên binh thiên tướng"}
+    tdata[3] = {objid,"#b#RNullVoids Warrior"}
 ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
     
     end
@@ -1650,13 +1650,13 @@ ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
 tdata = {}
     tdata[1] = "minitimer2";
     tdata[2] = "startBackwardTimer";
-    tdata[3] = {1,5,false}
+    tdata[3] = {1,10,false}
 ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
 
 tdata = {}
     tdata[1] = "minitimer2";
     tdata[2] = "showTimerTips";
-    tdata[3] = {{0},1,[=[#RPhòng sắp đóng:#B]=],true}
+    tdata[3] = {{0},1,[=[#R終#B極#G滅#Y絕:#K]=],true}
 ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
 ShowGameTipsWithoutFilter("OK")
 
