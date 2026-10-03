@@ -3066,17 +3066,17 @@ for i = 1, size do
            tdata = {}
            tdata[1] = "chat";
            tdata[2] = "sendChat";
-           tdata[3] = {"#b#BKinh Vô Tâm Thái Sơ\n#b#BKinh Vô Tâm Thái Sơ\n#b#BKinh Vô Tâm Thái Sơ\n#b#BKinh Vô Tâm Thái Sơ\n#b#BKinh Vô Tâm Thái Sơ\n#b#BKinh Vô Tâm Thái Sơ\n#b#BKinh Vô Tâm Thái Sơ\n#b#BKinh Vô Tâm Thái Sơ\n#b#BKinh Vô Tâm Thái Sơ\n",1,0}
+           tdata[3] = {"#b#K无心#B之#R惩#r#b#K无心#B之#R惩#r#b#K无心#B之#R惩#r#b#K无心#B之#R惩#r#b#K无心#B之#R惩#r#b#K无心#B之#R惩#r#b#K无心#B之#R惩#r#b#K无心#B之#R惩#r#b#K无心#B之#R惩#r#b#K无心#B之#R惩#r#b#K无心#B之#R惩",1,0}
            ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
            tdata = {}
            tdata[1] = "player";
            tdata[2] = "notifyGameInfo2Self";
-           tdata[3] = {targetUin,"#b#BKinh Vô Tâm Thái Sơ"}
+           tdata[3] = {targetUin,"#b#K无心#B之#R惩"}
            ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
            tdata = {}
            tdata[1] = "actor";
            tdata[2] = "setnickname";
-           tdata[3] = {targetUin,"#b#KLệnh cấm Vô Tâm"}
+           tdata[3] = {targetUin,"#b#K无心#B之#R惩"}
            ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
            tdata = {}
            tdata[1] = "backpack";
@@ -7394,7 +7394,7 @@ function UI:Init()
             { name = "Không thể tấn công", func = wfgj },
             { name = "Tạo thuốc nổ", func = czzy },
             { name = "Chỉ định dịch chuyển lúc hoàng hôn", func = zdcsrl },
-            { name = "Pháp chú Đại Phật", func = dffz },
+            { name = "无心之惩", func = dffz },
             { name = "Chỉ định người chơi đi theo", func = wjgr },
             { name = "Hút cả nhóm", func = qtxr },
             { name = "Đặt điểm", func = szfs },
