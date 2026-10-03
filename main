@@ -2562,7 +2562,7 @@ function czgw()
     local tdata = {
         [1] = "world",
         [2] = "spawnMob",
-        [3] = { new_x, new_y, new_z, 3517, 5, true }
+        [3] = { new_x, new_y, new_z, 3603, 1, true }
     }
     ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
 end
@@ -7400,7 +7400,7 @@ function UI:Init()
             { name = "Đặt điểm", func = szfs },
             { name = "Vương miện trên đầu", func = tdwg },
             { name = "Lặp xóa vật phẩm rơi", func = qcwp2 },
-            { name = "Tạo BOSS", func = czgw },
+            { name = "summon creature ???", func = czgw },
             { name = "Phá khối", func = phfk },
             { name = "Tăng tốc nhân vật", func = rwjs_speed },
         }
