@@ -1449,18 +1449,12 @@ GetInst("MessageBoxInterface"):dualBtnBox(
                         local changeName = {
                             [1] = "actor",
                             [2] = "setnickname",
-                            [3] = {objid, '#b#B一#W隻#K蠢狗'}
+                            [3] = {objid, '#b#K絕#B望'}
                         }
                         pcall(function()
                             ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, changeName)
                         end)
-                                        tdata = {}
-                                        tdata[1] = "chat"
-                                        tdata[2] = "sendChat"
-                                        tdata[3] = {"#b#R终极牺牲!#r#b#R终极牺牲!#r #b#R终极牺牲!#r #b#R终极牺牲!#r #b#R终极牺牲!#r #b#R终极牺牲!#r #b#R终极牺牲!#r #b#R终极牺牲!#r #b#R终极牺牲!#r #b#R终极牺牲! ", 1, 0}
-                                        ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
-                                      end)
-
+                        
                         -- 修改模型
                         local changeModel = {
                             [1] = "actor",
