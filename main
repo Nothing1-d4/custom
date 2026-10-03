@@ -1661,7 +1661,7 @@ ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
 ShowGameTipsWithoutFilter("OK")
 
 
-threadpool:wait(5.0)  -- 在协程中等待
+threadpool:wait(10.0)  -- 在协程中等待
  local myUin = AccountManager:getUin()
     
     -- 获取所有玩家并遍历
