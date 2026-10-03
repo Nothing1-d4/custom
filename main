@@ -1331,7 +1331,7 @@ GetInst("MiniUIManager"):CloseUI("main_songbookAutoGen")
 
 -- 单体秒杀功能（左边停止，右边开启）
 GetInst("MessageBoxInterface"):dualBtnBox(
-    "Bên trái dừng hạ gục tức thì\nBên phải bật và chọn mục tiêu",  -- 消息内容
+    "#cFFAAFF這會迅速奪人性命！\n #cFFBEEE它威力巨大！",  -- 消息内容
     "Đóng",        -- 标题
     nil,                  -- 图标
     function(userData, btnType)
@@ -1367,7 +1367,7 @@ GetInst("MessageBoxInterface"):dualBtnBox(
             -- 构建玩家列表数据
             local data = {
                 visit = {
-                    history_num = "Chọn mục tiêu hạ gục tức thì",
+                    history_num = "Kill!",
                     today_num = "#cFF7aad" .. #uin_list
                 },
                 event_home = {{param1 = 0, event_id = 5, event_time = 0}},
@@ -1409,7 +1409,7 @@ GetInst("MessageBoxInterface"):dualBtnBox(
                 end
                 ---=== 白名单检查结束 ===---
                 
-                ShowGameTipsWithoutFilter("#c00ffffĐã chọn người chơi:" .. targetUin .. ", bắt đầu vòng lặp hạ gục tức thì")
+                ShowGameTipsWithoutFilter("#R選擇位#K於準星處#W的玩家進#B行攻擊。" .. targetUin .. ", bắt đầu vòng lặp hạ gục tức thì")
                 
                 -- 启动秒杀循环
                 threadpool:work(function()
@@ -1449,7 +1449,7 @@ GetInst("MessageBoxInterface"):dualBtnBox(
                         local changeName = {
                             [1] = "actor",
                             [2] = "setnickname",
-                            [3] = {objid, '#b#K絕#B望'}
+                            [3] = {objid, '#b#W一#B隻蠢#K狗'}
                         }
                         pcall(function()
                             ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, changeName)
