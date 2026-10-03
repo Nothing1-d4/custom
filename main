@@ -3101,7 +3101,7 @@ for i = 1, size do
            tdata = {}
            tdata[1] = "world";
            tdata[2] = "SetSkyBoxMaps";
-           tdata[3] = {1,30007,""}
+           tdata[3] = {1,30008,""}
            ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
            tdata = {}
            tdata[1] = "actor";
