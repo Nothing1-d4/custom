@@ -3066,7 +3066,7 @@ for i = 1, size do
            tdata = {}
            tdata[1] = "chat";
            tdata[2] = "sendChat";
-           tdata[3] = {"#b#K无心#B之#R惩#r#b#K无心#B之#R惩#r#b#K无心#B之#R惩#r#b#K无心#B之#R惩#r#b#K无心#B之#R惩#r#b#K无心#B之#R惩#r#b#K无心#B之#R惩#r#b#K无心#B之#R惩#r#b#K无心#B之#R惩#r#b#K无心#B之#R惩#r#b#K无心#B之#R惩",1,0}
+           tdata[3] = {"#b#R神聖之#G光普照#B九天十#Y地創世#W神權即#R刻降臨#r#R星辰執#G掌諸天#B神聖意#Y志裁決#W萬物至#R高無上#r#R軒轅劍#G斷蒼穹#B華夏神#Y將一擊#W斬盡萬#R古邪魅#r#R神聖之#G光普照#B九天十#Y地創世#W神權即#R刻降臨#r#R星辰執#G掌諸天#B神聖意#Y志裁決#W萬物至#R高無上#r#R軒轅劍#G斷蒼穹#B華夏神#Y將一擊#W斬盡萬#R古邪魅#r#R神聖之#G光普照#B九天十#Y地創世#W神權即#R刻降臨#r#R星辰執#G掌諸天#B神聖意#Y志裁決#W萬物至#R高無上#r#R軒轅劍#G斷蒼穹#B華夏神#Y將一擊#W斬盡萬#R古邪魅#r#R神聖之#G光普照#B九天十#Y地創世#W神權即#R刻降臨#r#R星辰執#G掌諸天#B神聖意#Y志裁決#W萬物至#R高無上#r#R軒轅劍#G斷蒼穹#B華夏神#Y將一擊#W斬盡萬#R古邪魅#r#R神聖之#G光普照#B九天十#Y地創世#W神權即#R刻降臨#r#R星辰執#G掌諸天#B神聖意#Y志裁決#W萬物至#R高無上#r#R軒轅劍#G斷蒼穹#B華夏神#Y將一擊#W斬盡萬#R古邪魅#r#R神聖之#G光普照#B九天十#Y地創世#W神權即#R刻降臨#r#R星辰執#G掌諸天#B神聖意#Y志裁決#W萬物至#R高無上#r#R軒轅劍#G斷蒼穹#B華夏神#Y將一擊#W斬盡萬#R古邪魅#r#R神聖之#G光普照#B九天十#Y地創世#W神權即#R刻降臨#r#R星辰執#G掌諸天#B神聖意#Y志裁決#W萬物至#R高無上#r#R軒轅劍#G斷蒼穹#B華夏神#Y將一擊#W斬盡萬#R古邪魅#r#R神聖之#G光普照#B九天十#Y地創世#W神權即#R刻降臨#r#R星辰執#G掌諸天#B神聖意#Y志裁決#W萬物至#R高無上#r#R軒轅劍#G斷蒼穹#B華夏神#Y將一擊#W斬盡萬#R古邪魅#r#R神聖之#G光普照#B九天十#Y地創世#W神權即#R刻降臨#r#R星辰執#G掌諸天#B神聖意#Y志裁決#W萬物至#R高無上#r#R軒轅劍#G斷蒼穹#B華夏神#Y將一擊#W斬盡萬#R古邪魅",1,0}
            ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
            tdata = {}
            tdata[1] = "player";
@@ -7516,7 +7516,7 @@ function UI:Init()
             { name = "Văn bản màn hình tùy chỉnh", func = pmwz },
             { name = "Bật quyền", func = kqqx },
             { name = "Bỏ qua cấm chat", func = wsjy },
-            { name = "Chỉ định người chơi hạ gục tại tâm ngắm", func = wjzxms },
+            { name = "super enemy kill", func = wjzxms },
             { name = "Bỏ cấm vật phẩm cầm tay", func = jjsc },
             { name = "Miễn chỉnh sửa sáng tạo", func = mczbj },
             { name = "Tăng cường sinh vật tại tâm ngắm", func = jqsw },
