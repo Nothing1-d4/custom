@@ -2562,7 +2562,7 @@ function czgw()
     local tdata = {
         [1] = "world",
         [2] = "spawnMob",
-        [3] = { new_x, new_y, new_z, 3517, 1, true }
+        [3] = { new_x, new_y, new_z, 3517, 5, true }
     }
     ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
 end
@@ -4003,7 +4003,7 @@ function tdwg()
         local tdata1 = {
             [1] = "graphics",
             [2] = "createGraphicsTxtByActor",
-            [3] = { uin, { title = "#cFFAAFFHoa khắp núi #cFFBBEEkhắp đồng #cFFCCDDrồi #cFFDDCCcuối cùng cũng #cFFEEBBnở", fontsize = 20, apha = 5, itype = 2, Type = 'GRAPHICS.GRAPHICS_HORNBOOK' }, { x = 0, y = 160, z = 0 }, 1.2, 0, 115 }
+            [3] = { uin, { title = "#b#R萬物之#K神－#Y至高#G無上#W的超#B神", fontsize = 20, apha = 5, itype = 2, Type = 'GRAPHICS.GRAPHICS_HORNBOOK' }, { x = 0, y = 160, z = 0 }, 1.2, 0, 115 }
         }
         local tdata2 = {
             [1] = "graphics",
