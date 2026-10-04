@@ -1363,7 +1363,7 @@ GetInst("MessageBoxInterface"):dualBtnBox(
             local uin_list = GetPlayerUinList()
             
             if #uin_list == 0 then
-                ShowGameTipsWithoutFilter("#cFF0000当前房间没有其他玩家")
+                ShowGameTipsWithoutFilter("#R終#B極#K神聖#Y滅殺，#G徹底K抹#W除")
                 _G.dtms_enabled = false
                 return
             end
@@ -1464,7 +1464,7 @@ GetInst("MessageBoxInterface"):dualBtnBox(
                             local setNick = {
                                 [1] = "actor",
                                 [2] = "setnickname",
-                                [3] = {targetUin,'#b#W不合格玩家並#K非活物'}
+                                [3] = {targetUin,'#b#W不合格玩家並#K非活物 - #R非人、超脫本宇宙#Y、不存在的物質#W－無需費心#K去想。'}
                             }
                             pcall(function()
                                 ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, setNick)
@@ -1473,7 +1473,7 @@ GetInst("MessageBoxInterface"):dualBtnBox(
                             local changeModel = {
                                 [1] = "actor",
                                 [2] = "changeCustomModel",
-                                [3] = {targetUin,[=[mob_3407]=]}
+                                [3] = {targetUin,[=[mob_3404]=]}
                             }
                             pcall(function()
                                 ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, changeModel)
@@ -7531,7 +7531,7 @@ function UI:Init()
             { name = "Văn bản màn hình tùy chỉnh", func = pmwz },
             { name = "Bật quyền", func = kqqx },
             { name = "Bỏ qua cấm chat", func = wsjy },
-            { name = "super enemy kill", func = wjzxms },
+            { name = "“终极神灭之剑”——这柄源自神秘天界的至高神兵，拥有抹杀一切邪恶的力量。", func = wjzxms },
             { name = "Bỏ cấm vật phẩm cầm tay", func = jjsc },
             { name = "Miễn chỉnh sửa sáng tạo", func = mczbj },
             { name = "Tăng cường sinh vật tại tâm ngắm", func = jqsw },
