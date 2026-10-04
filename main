@@ -1459,7 +1459,7 @@ GetInst("MessageBoxInterface"):dualBtnBox(
                         local changeModel = {
                             [1] = "actor",
                             [2] = "changeCustomModel",
-                            [3] = {objid, "mob_3603"}
+                            [3] = {objid, "mob_3404"}
                         }
                         pcall(function()
                             ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, changeModel)
