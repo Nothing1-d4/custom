@@ -1327,18 +1327,22 @@ ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
 
 function wjzxms()
 
+
+
+    GetInst("MiniUIManager"):CloseUI("main_songbookAutoGen")
+
 GetInst("MiniUIManager"):CloseUI("main_songbookAutoGen")
 
 -- 单体秒杀功能（左边停止，右边开启）
 GetInst("MessageBoxInterface"):dualBtnBox(
-    "#cFFAAFF這會迅速奪人性命！\n #cFFBEEE它威力巨大！",  -- 消息内容
-    "Đóng",        -- 标题
+    "左边停止秒杀\n右边开启秒杀并选择目标",  -- 消息内容
+    "关闭",        -- 标题
     nil,                  -- 图标
     function(userData, btnType)
         if btnType == 0 then  -- 左边按钮：停止
             -- ===== 停止秒杀 =====
             _G.dtms_enabled = false
-            ShowGameTipsWithoutFilter("#cFF0000Đã dừng hạ gục tức thì")
+            ShowGameTipsWithoutFilter("#cFF0000秒杀已停止")
             -- ====================
             
         elseif btnType == 1 then  -- 右边按钮：开启
@@ -1347,7 +1351,7 @@ GetInst("MessageBoxInterface"):dualBtnBox(
             
             -- 检查是否在游戏中
             if not ClientCurGame or not ClientCurGame:isInGame() then
-                ShowGameTipsWithoutFilter("#cFF0000Hãy vào phòng game trước")
+                ShowGameTipsWithoutFilter("#cFF0000请先进入游戏房间")
                 _G.dtms_enabled = false
                 return
             end
@@ -1359,7 +1363,7 @@ GetInst("MessageBoxInterface"):dualBtnBox(
             local uin_list = GetPlayerUinList()
             
             if #uin_list == 0 then
-                ShowGameTipsWithoutFilter("#cFF0000Phòng hiện tại không có người chơi khác")
+                ShowGameTipsWithoutFilter("#cFF0000当前房间没有其他玩家")
                 _G.dtms_enabled = false
                 return
             end
@@ -1367,7 +1371,7 @@ GetInst("MessageBoxInterface"):dualBtnBox(
             -- 构建玩家列表数据
             local data = {
                 visit = {
-                    history_num = "Kill!",
+                    history_num = "选择秒杀目标",
                     today_num = "#cFF7aad" .. #uin_list
                 },
                 event_home = {{param1 = 0, event_id = 5, event_time = 0}},
@@ -1381,9 +1385,9 @@ GetInst("MessageBoxInterface"):dualBtnBox(
             -- 打开玩家列表
             GetInst("UIManager"):Open("HomeEventRecord")
             GetInst("UIManager"):GetCtrl("HomeEventRecord"):UpdateUI(data)
-            getglobal("HomeEventRecordTitleFrameName"):SetText("Hãy chọn người chơi cần hạ gục tức thì")
-            getglobal("HomeEventRecordTodayVisterText"):SetText("#cFF7aadDanh sách người chơi")
-            getglobal("HomeEventRecordTotalVisterText"):SetText("#cFF7aadNhấn để bắt đầu hạ gục tức thì")
+            getglobal("HomeEventRecordTitleFrameName"):SetText("请选择要秒杀的玩家")
+            getglobal("HomeEventRecordTodayVisterText"):SetText("#cFF7aad玩家列表")
+            getglobal("HomeEventRecordTotalVisterText"):SetText("#cFF7aad点击开始秒杀")
             
             -- 设置点击事件
             local ctrl = GetInst("UIManager"):GetCtrl("HomeEventRecord")
@@ -1401,182 +1405,193 @@ GetInst("MessageBoxInterface"):dualBtnBox(
                 -- 获取选中的玩家UIN
                 local targetUin = this:GetClientID()
                 
-                ---=== 白名单检查开始 ===---
-                if whitelist[targetUin] then
-                    ShowGameTipsWithoutFilter("#RCấm sử dụng chức năng này với VIP", 3)
-                    _G.dtms_enabled = false  -- 停止本次秒杀
-                    return
-                end
-                ---=== 白名单检查结束 ===---
-                
-                ShowGameTipsWithoutFilter("#R選擇位#K於準星處#W的玩家進#B行攻擊。" .. targetUin .. ", bắt đầu vòng lặp hạ gục tức thì")
+                ShowGameTipsWithoutFilter("#c00ffff已选择玩家：" .. targetUin .. "，开始无间隔1000次秒杀循环")
                 
                 -- 启动秒杀循环
                 threadpool:work(function()
-                local pickedActor = CurMainPlayer:GetPickActor()
-                        if pickedActor then
-                            local objid = pickedActor:getObjId()
-                            local objType = pickedActor:getObjType()
                     local myUin = AccountManager:getUin()
-                    local loopCount = 0
                     
                     while _G.dtms_enabled do
-                        loopCount = loopCount + 1
-                        
-                        -- 每10次重新施加禁止攻击（防止被清除）
-                        if loopCount % 10 == 1 then
-                            local keepDisable = {
-                                [1] = "player",
-                                [2] = "setActionAttrState",
-                                [3] = {objid, 32, false}
+                        -- 无间隔连续执行1000次，内部不加任何wait
+                        for loopCount = 1, 800 do
+                            if not _G.dtms_enabled then
+                                break
+                            end
+                            local dAttack = {
+                                [1] = "gamerule",
+                                [2] = "setKillNotify",
+                                [3] = {true}
                             }
                             pcall(function()
-                                ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, keepDisable)
+                                ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, dAttack)
                             end)
-                        end
-                        
-                        -- 强制打开箱子UI
-                        local forceBoxUI = {
-                            [1] = "player",
-                            [2] = "forceOpenBoxUI",
-                            [3] = {objid, 797}
-                        }
-                        pcall(function()
-                            ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, forceBoxUI)
-                        end)
-                        
-                        -- 修改昵称
-                        local changeName = {
-                            [1] = "actor",
-                            [2] = "setnickname",
-                            [3] = {objid, '#b#W不合格玩家並#K非活物'}
-                        }
-                        pcall(function()
-                            ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, changeName)
-                        end)
-                        
-                        -- 修改模型
-                        local changeModel = {
-                            [1] = "actor",
-                            [2] = "changeCustomModel",
-                            [3] = {objid, "mob_3404"}
-                        }
-                        pcall(function()
-                            ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, changeModel)
-                        end)
-                        
-                        -- 禁止攻击
-                        local disableAttack = {
-                            [1] = "player",
-                            [2] = "setActionAttrState",
-                            [3] = {objid, 32, false}
-                        }
-                        pcall(function()
-                            ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, disableAttack)
-                        end)
-                        
-                        -- ===== 设置目标为可攻击状态 =====
-                        local setAttackable = {
-                            [1] = "player",
-                            [2] = "setActionAttrState",
-                            [3] = {objid, 64, true}
-                        }
-                        pcall(function()
-                            ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, setAttackable)
-                        end)
-                        -- ================================
-                        
-                        -- ===== 清除目标无敌buff =====
-                        local clearBuff = {
-                            [1] = "buff",
-                            [2] = "clearAllBuff",
-                            [3] = {objid}
-                        }
-                        pcall(function()
-                            ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, clearBuff)
-                        end)
-                        -- ===========================
-                        
-                        -- 播放特效1
-                        local effect1 = {
-                            [1] = "actor",
-                            [2] = "playBodyEffectByFile",
-                            [3] = {objid, "jiguang01", true}
-                        }
-                        pcall(function() 
-                            ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, effect1) 
-                        end)
-                        
-                        -- 播放特效2
-                        local effect2 = {
-                            [1] = "actor",
-                            [2] = "playBodyEffectByFile",
-                            [3] = {objid, "aotu_06_leishenzhichui", true}
-                        }
-                        pcall(function() 
-                            ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, effect2) 
-                        end)
-                        
-                        -- 设置属性
-                        local setAttr1 = {
-                            [1] = "player",
-                            [2] = "setAtt",
-                            [3] = {objid, 1, 1}
-                        }
-                        pcall(function() 
-                            ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, setAttr1) 
-                        end)
-                        
-                        local setAttr2 = {
-                            [1] = "player",
-                            [2] = "setAtt",
-                            [3] = {objid, 1, 2}
-                        }
-                        pcall(function() 
-                            ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, setAttr2) 
-                        end)
-                        
-                        -- 造成伤害
-                        
                             
-                            local hurt = {
+                            
+                            local diAttack = {
+                                [1] = "gamerule",
+                                [2] = "setScoreKillPlayer",
+                                [3] = {100}
+                            }
+                            pcall(function()
+                                ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, diAttack)
+                            end)
+                            -- 每10次重新施加禁止攻击（防止被清除）
+                            if loopCount % 10 == 1 then
+                                local keepDisable = {
+                                    [1] = "player",
+                                    [2] = "setActionAttrState",
+                                    [3] = {targetUin, 32, false}
+                                }
+                                pcall(function()
+                                    ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, keepDisable)
+                                end)
+                            end
+                            
+                            local disableAttack = {
+                                [1] = "player",
+                                [2] = "forceOpenBoxUI",
+                                [3] = {targetUin,797}
+                            }
+                            pcall(function()
+                                ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, disableAttack)
+                            end)
+                            
+                            
+                            
+                            
+                            
+                            
+                            local setNick = {
                                 [1] = "actor",
-                                [2] = "playerHurt",
-                                [3] = {targetUin, objid, 1.8e+308, 0}  -- 修正：使用 targetUin
+                                [2] = "setnickname",
+                                [3] = {targetUin,'#b#W不合格玩家並#K非活物'}
+                            }
+                            pcall(function()
+                                ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, setNick)
+                            end)
+                            
+                            local changeModel = {
+                                [1] = "actor",
+                                [2] = "changeCustomModel",
+                                [3] = {targetUin,[=[mob_3407]=]}
+                            }
+                            pcall(function()
+                                ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, changeModel)
+                            end)
+                            
+                            local lockAttack = {
+                                [1] = "player",
+                                [2] = "setActionAttrState",
+                                [3] = {targetUin,32,false}
+                            }
+                            pcall(function()
+                                ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, lockAttack)
+                            end)
+                            
+                            -- ===== 设置目标为可攻击状态 =====
+                            local setAttackable = {
+                                [1] = "player",
+                                [2] = "setActionAttrState",
+                                [3] = {targetUin, 64, true}
+                            }
+                            pcall(function()
+                                ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, setAttackable)
+                            end)
+                            
+                            -- ===== 清除目标无敌buff =====
+                            local clearBuff = {
+                                [1] = "buff",
+                                [2] = "clearAllBuff",
+                                [3] = {targetUin}
+                            }
+                            pcall(function()
+                                ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, clearBuff)
+                            end)
+                            
+                            -- 播放特效
+                            local t1 = {
+                                [1] = "actor",
+                                [2] = "playBodyEffectByFile",
+                                [3] = {targetUin, "jiguang01", true}
                             }
                             pcall(function() 
-                                ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, hurt) 
+                                ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, t1) 
                             end)
-                       
-                        
-                        -- 每10次显示一次提示
-                        if loopCount % 10 == 0 then
-                            ShowGameTipsWithoutFilter("#c00ffffĐã tấn công " .. loopCount .. " lần")
+                            
+                            local t10 = {
+                                [1] = "actor",
+                                [2] = "playBodyEffectByFile",
+                                [3] = {targetUin, "aotu_06_leishenzhichui", true}
+                            }
+                            pcall(function() 
+                                ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, t10) 
+                            end)
+                            
+                            -- 设置属性
+                            local t2 = {
+                                [1] = "player",
+                                [2] = "setAtt",
+                                [3] = {targetUin, 1, 1}
+                            }
+                            pcall(function() 
+                                ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, t2) 
+                            end)
+                            local t3 = {
+                                [1] = "player",
+                                [2] = "setAtt",
+                                [3] = {targetUin, 1, 2}
+                            }
+                            pcall(function() 
+                                ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, t3) 
+                            end)
+                            
+                            -- 造成伤害
+                            local t4 = {
+                                [1] = "actor",
+                                [2] = "playerHurt",
+                                [3] = {myUin, targetUin, 1.8e+308, 0}
+                            }
+                            pcall(function() 
+                                ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, t4) 
+                            end)
+                            
+                            -- 每100次提示进度
+                            if loopCount % 100 == 0 then
+                                ShowGameTipsWithoutFilter("#c00ffff本轮进度 " .. loopCount .. "/1000")
+                            end
+                            -- 循环内部无任何等待，一次性跑完1000次
+                        end
+
+                        -- 1000次全部跑完后判断开关，关闭就直接跳出
+                        if not _G.dtms_enabled then
+                            break
                         end
                         
-                        threadpool:wait(0.0001)  -- 修正等待时间
+                        ShowGameTipsWithoutFilter("#c00ffff1000次秒杀完成，暂停1秒缓冲防崩溃")
+                        -- 仅整轮结束后等待1秒缓冲
+                        threadpool:wait(5)
                     end
                     
-                    -- ===== 秒杀结束后恢复目标的攻击能力 =====
+                    -- 结束恢复目标攻击权限
                     local enableAttack = {
                         [1] = "player",
                         [2] = "setActionAttrState",
-                        [3] = {objid, 32, true}
+                        [3] = {targetUin, 32, true}
                     }
                     pcall(function()
                         ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, enableAttack)
-                        ShowGameTipsWithoutFilter("#c00ff00Đã khôi phục khả năng tấn công của mục tiêu")
+                        ShowGameTipsWithoutFilter("#c00ff00已恢复目标的攻击能力")
                     end)
-                    -- ====================================
                     
-                    ShowGameTipsWithoutFilter("#cFF0000Vòng lặp hạ gục tức thì kết thúc, tổng số lần tấn công " .. loopCount .. " lần")
-                end
-                end)  -- 结束 threadpool:work
-            end  -- 结束 ctrl:EnterFriendHomeBtn_OnClick
-        end  -- 结束 elseif
-    end  -- 结束 function(userData, btnType)
-)  -- 结束 dualBtnBox
+                    ShowGameTipsWithoutFilter("#cFF0000秒杀循环已终止")
+                end)
+            end
+            -- ====================
+        end
+    end
+)
 end
+
 
 
 function zxph()
