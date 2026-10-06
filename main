@@ -1,4 +1,7 @@
 ShowGameTipsWithoutFilter('Đã tải thành công')
+
+MessageBox(4,"#cFF0000您好，歡迎使用 \n #cFFAAFFModified MOON 選單 #G（版本 2.1），#cFFBEEE此版本包含一些已修改的功能。 \n \n \n #cFF00FF此內容將不時更新新功能。")
+
 InitGameAPI()
 GameVmTriggerInit()
 local effectNameList = {
