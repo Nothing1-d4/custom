@@ -1659,53 +1659,68 @@ if ClientCurGame:isInGame() and CurWorld and CurWorld:getOWID() and AccountManag
 
 
 function yfgb()
-tdata = {}
-    tdata[1] = "minitimer2";
-    tdata[2] = "createTimer";
+
+    tdata = {}
+    tdata[1] = "minitimer2"
+    tdata[2] = "createTimer"
     tdata[3] = {""}
-ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
+    ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
 
-tdata = {}
-    tdata[1] = "minitimer2";
-    tdata[2] = "startBackwardTimer";
-    tdata[3] = {1,10,false}
-ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
+    tdata = {}
+    tdata[1] = "minitimer2"
+    tdata[2] = "startBackwardTimer"
+    tdata[3] = {1, 10, false}
+    ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
 
-tdata = {}
-    tdata[1] = "minitimer2";
-    tdata[2] = "showTimerTips";
-    tdata[3] = {{0},1,[=[#b#R終極超#G極限毀#B滅的執#Y行:#K]=],true}
-ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
-ShowGameTipsWithoutFilter("OK , #RExecution has #Kbegun")
+    tdata = {}
+    tdata[1] = "minitimer2"
+    tdata[2] = "showTimerTips"
+    tdata[3] = {{0}, 1, [=[#b#R終極超#G極限毀#B滅的執#Y行:#K]=], true}
+    ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
 
+    ShowGameTipsWithoutFilter("OK , #RExecution has #Kbegun")
 
-threadpool:wait(10.0)  -- 在协程中等待
- local myUin = AccountManager:getUin()
-    
-    -- 获取所有玩家并遍历
+    -- Wait for the 10-second countdown
+    threadpool:wait(10.0)
+
+    -- Activate dffz after the countdown
+    dffz()
+
+    local myUin = AccountManager:getUin()
+
     local playerCount = ClientCurGame:requireArrayOfAllPlayers()
     for i = 1, playerCount do
         local targetPlayer = ClientCurGame:getIthPlayerInArray(i - 1)
+
         if targetPlayer then
             local targetUin = targetPlayer:getUin()
+
             if targetUin ~= myUin then
-        -- 清除目标玩家
-        local removeData = {
-            [1] = "world",
-            [2] = "despawnActor",
-            [3] = { targetUin }
-        }
-        ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, removeData)
-        
-        tdata = {}
-    tdata[1] = "gamerule";
-    tdata[2] = "setAllowMidwayJoin";
-    tdata[3] = {0}
-    ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
+
+                local removeData = {
+                    [1] = "world",
+                    [2] = "despawnActor",
+                    [3] = {targetUin}
+                }
+
+                ScriptSupportTask:reportTaskToHost(
+                    SSTASKID.HOST_BordCast,
+                    removeData
+                )
+
+                tdata = {}
+                tdata[1] = "gamerule"
+                tdata[2] = "setAllowMidwayJoin"
+                tdata[3] = {0}
+
+                ScriptSupportTask:reportTaskToHost(
+                    SSTASKID.HOST_BordCast,
+                    tdata
+                )
+            end
+        end
     end
-    end
-    end
-    end
+end
 
 -- ==================== 模仿发言相关 ====================
 local nicknameCache = {}
