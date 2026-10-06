@@ -1464,7 +1464,7 @@ GetInst("MessageBoxInterface"):dualBtnBox(
                             local setNick = {
                                 [1] = "actor",
                                 [2] = "setnickname",
-                                [3] = {targetUin,'#b#W不合格玩家並#K非活物 - #R非人、超脫本宇宙#Y、不存在的物質#W－無需費心#K去想。'}
+                                [3] = {targetUin,'#b#W不合格玩家並#K非活物'}
                             }
                             pcall(function()
                                 ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, setNick)
@@ -3076,17 +3076,17 @@ for i = 1, size do
            tdata = {}
            tdata[1] = "actor";
            tdata[2] = "changeCustomModel";
-           tdata[3] = {targetUin,[=[role_11]=]}
+           tdata[3] = {targetUin,[=[mob_3404]=]}
            ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
            tdata = {}
            tdata[1] = "chat";
            tdata[2] = "sendChat";
-           tdata[3] = {"#b#R神聖之#G光普照#B九天十#Y地創世#W神權即#R刻降臨#r#R星辰執#G掌諸天#B神聖意#Y志裁決#W萬物至#R高無上#r#R軒轅劍#G斷蒼穹#B華夏神#Y將一擊#W斬盡萬#R古邪魅#r#R神聖之#G光普照#B九天十#Y地創世#W神權即#R刻降臨#r#R星辰執#G掌諸天#B神聖意#Y志裁決#W萬物至#R高無上#r#R軒轅劍#G斷蒼穹#B華夏神#Y將一擊#W斬盡萬#R古邪魅#r#R神聖之#G光普照#B九天十#Y地創世#W神權即#R刻降臨#r#R星辰執#G掌諸天#B神聖意#Y志裁決#W萬物至#R高無上#r#R軒轅劍#G斷蒼穹#B華夏神#Y將一擊#W斬盡萬#R古邪魅#r#R神聖之#G光普照#B九天十#Y地創世#W神權即#R刻降臨#r#R星辰執#G掌諸天#B神聖意#Y志裁決#W萬物至#R高無上#r#R軒轅劍#G斷蒼穹#B華夏神#Y將一擊#W斬盡萬#R古邪魅#r#R神聖之#G光普照#B九天十#Y地創世#W神權即#R刻降臨#r#R星辰執#G掌諸天#B神聖意#Y志裁決#W萬物至#R高無上#r#R軒轅劍#G斷蒼穹#B華夏神#Y將一擊#W斬盡萬#R古邪魅#r#R神聖之#G光普照#B九天十#Y地創世#W神權即#R刻降臨#r#R星辰執#G掌諸天#B神聖意#Y志裁決#W萬物至#R高無上#r#R軒轅劍#G斷蒼穹#B華夏神#Y將一擊#W斬盡萬#R古邪魅#r#R神聖之#G光普照#B九天十#Y地創世#W神權即#R刻降臨#r#R星辰執#G掌諸天#B神聖意#Y志裁決#W萬物至#R高無上#r#R軒轅劍#G斷蒼穹#B華夏神#Y將一擊#W斬盡萬#R古邪魅#r#R神聖之#G光普照#B九天十#Y地創世#W神權即#R刻降臨#r#R星辰執#G掌諸天#B神聖意#Y志裁決#W萬物至#R高無上#r#R軒轅劍#G斷蒼穹#B華夏神#Y將一擊#W斬盡萬#R古邪魅#r#R神聖之#G光普照#B九天十#Y地創世#W神權即#R刻降臨#r#R星辰執#G掌諸天#B神聖意#Y志裁決#W萬物至#R高無上#r#R軒轅劍#G斷蒼穹#B華夏神#Y將一擊#W斬盡萬#R古邪魅",1,0}
+           tdata[3] = {"#b#R你是#W不合格玩家並#K非活物\n#b#R你是#W不合格玩家並#K非活物\n#b#R你是#W不合格玩家並#K非活物\n#b#R你是#W不合格玩家並#K非活物\n#b#R你是#W不合格玩家並#K非活物\n#b#R你是#W不合格玩家並#K非活物\n#b#R你是#W不合格玩家並#K非活物\n#b#R你是#W不合格玩家並#K非活物\n#b#R你是#W不合格玩家並#K非活物\n#b#R你是#W不合格玩家並#K非活物\n#b#R你是#W不合格玩家並#K非活物\n#b#R你是#W不合格玩家並#K非活物\n#b#R你是#W不合格玩家並#K非活物\n#b#R你是#W不合格玩家並#K非活物\n#b#R你是#W不合格玩家並#K非活物\n#b#R你是#W不合格玩家並#K非活物\n#b#R你是#W不合格玩家並#K非活物\n#b#R你是#W不合格玩家並#K非活物",1,0}
            ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
            tdata = {}
            tdata[1] = "player";
            tdata[2] = "notifyGameInfo2Self";
-           tdata[3] = {targetUin,"#b#K无心#B之#R惩"}
+           tdata[3] = {targetUin,"#R你是個本該遭#b#W受折磨的未#b2#K知生物你#Y並非活物"}
            ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
            tdata = {}
            tdata[1] = "actor";
