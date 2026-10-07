@@ -1200,21 +1200,153 @@ function zxyj()
     end
 end
 
-function pmwz()
-ShowTextInputSafe(function(text)
-        tdata = {}
-    tdata[1] = "minitimer2";
-    tdata[2] = "createTimer";
-    tdata[3] = {""}
-ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
+local function splitUtf8(text)
+    local characters = {}
 
-tdata = {}
-    tdata[1] = "minitimer2";
-    tdata[2] = "showTimerTips";
-    tdata[3] = {{0},1,text,true}
-ScriptSupportTask:reportTaskToHost(SSTASKID.HOST_BordCast, tdata)
+    for character in string.gmatch(
+        text,
+        "[%z\1-\127\194-\244][\128-\191]*"
+    ) do
+        table.insert(characters, character)
+    end
+
+    return characters
+end
+
+local function hsvToRgb(hue, saturation, value)
+    local sector = math.floor(hue * 6)
+    local fraction = hue * 6 - sector
+
+    local p = value * (1 - saturation)
+    local q = value * (1 - fraction * saturation)
+    local t = value * (1 - (1 - fraction) * saturation)
+
+    sector = sector % 6
+
+    local red, green, blue
+
+    if sector == 0 then
+        red, green, blue = value, t, p
+    elseif sector == 1 then
+        red, green, blue = q, value, p
+    elseif sector == 2 then
+        red, green, blue = p, value, t
+    elseif sector == 3 then
+        red, green, blue = p, q, value
+    elseif sector == 4 then
+        red, green, blue = t, p, value
+    else
+        red, green, blue = value, p, q
+    end
+
+    return math.floor(red * 255 + 0.5),
+           math.floor(green * 255 + 0.5),
+           math.floor(blue * 255 + 0.5)
+end
+
+local function rgbToHex(red, green, blue)
+    return string.format("%02x%02x%02x", red, green, blue)
+end
+
+local function createSmoothRainbow(text, baseHue)
+    local characters = splitUtf8(text)
+    local result = {}
+    local letterIndex = 0
+
+    for _, character in ipairs(characters) do
+        if character == " " or character == "\n" then
+            table.insert(result, character)
+        else
+            local hue = (baseHue + letterIndex * 0.08) % 1
+            local red, green, blue = hsvToRgb(hue, 1, 1)
+
+            table.insert(
+                result,
+                "#c" .. rgbToHex(red, green, blue) .. character
+            )
+
+            letterIndex = letterIndex + 1
+        end
+    end
+
+    return table.concat(result)
+end
+
+_G.pmwz_enabled = false
+_G.pmwz_generation = (_G.pmwz_generation or 0) + 1
+
+function pmwz()
+    _G.pmwz_generation = _G.pmwz_generation + 1
+    local generation = _G.pmwz_generation
+
+    ShowTextInputSafe(function(text)
+
+        if not _G.pmwz_enabled then
+            return
+        end
+
+        tdata = {}
+        tdata[1] = "minitimer2"
+        tdata[2] = "createTimer"
+        tdata[3] = {""}
+
+        ScriptSupportTask:reportTaskToHost(
+            SSTASKID.HOST_BordCast,
+            tdata
+        )
+
+        threadpool:work(function()
+
+            local baseHue = 0
+
+            while _G.pmwz_enabled
+              and generation == _G.pmwz_generation do
+
+                local rainbowText =
+                    createSmoothRainbow(text, baseHue)
+
+                tdata = {}
+                tdata[1] = "minitimer2"
+                tdata[2] = "showTimerTips"
+                tdata[3] = {{0}, 1, rainbowText, true}
+
+                ScriptSupportTask:reportTaskToHost(
+                    SSTASKID.HOST_BordCast,
+                    tdata
+                )
+
+                baseHue = (baseHue + 0.02) % 1
+
+                threadpool:wait(0.05)
+            end
+
+        end)
+
     end)
 end
+
+GetInst("MessageBoxInterface"):dualBtnBox(
+    "Do you want to run this?",
+    "Confirm",
+    nil,
+    function(userData, btnType)
+
+        if btnType == 0 then
+            _G.pmwz_enabled = false
+            _G.pmwz_generation = _G.pmwz_generation + 1
+
+            ShowGameTipsWithoutFilter("#cFF0000Stopped")
+
+        elseif btnType == 1 then
+            _G.pmwz_enabled = true
+
+            ShowGameTipsWithoutFilter("#c00FF00Started")
+
+            pmwz()
+        end
+
+    end
+)
 
 function kqqx()
 local nameList = { 1, 2, 4, 8, 16,32, 256,512,2048}
